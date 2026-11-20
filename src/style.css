@@ -1,0 +1,65 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #f2f7fb;
+  background: #101925;
+  color-scheme: dark;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-height: 100svh;
+  margin: 0;
+  padding: 1.25rem;
+  background: radial-gradient(ellipse at 20% 15%, #203d45, transparent 70%);
+}
+
+main {
+  box-sizing: border-box;
+  width: min(100%, 35rem);
+  padding: clamp(1.5rem, 6vw, 3.75rem);
+  border: 1px solid #38525e;
+  border-radius: 1.25rem;
+  background: #15242f;
+}
+
+.product {
+  margin: 0;
+  color: #9be3ca;
+  font-weight: 600;
+}
+
+h1 {
+  margin: .5rem 0 .75rem;
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  line-height: 1.2;
+}
+
+.description {
+  margin: 0 0 1.5rem;
+  color: #bed0da;
+  line-height: 1.65;
+}
+
+button {
+  padding: .65rem 1rem;
+  border: 0;
+  border-radius: .5rem;
+  background: #9be3ca;
+  color: #10251f;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+.status {
+  min-height: 1.5em;
+  margin: .75rem 0 0;
+  color: #9be3ca;
+}
