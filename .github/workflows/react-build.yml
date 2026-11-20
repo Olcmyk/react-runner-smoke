@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   build:
+    if: github.repository == 'Olcmyk/react-runner-smoke' && github.ref == 'refs/heads/main'
     runs-on: [self-hosted, Linux, X64, react-runner-smoke]
     timeout-minutes: 10
     steps:
@@ -24,7 +25,7 @@ jobs:
           package-manager-cache: false
       - name: Report runner
         run: |
-          printf 'Runner %s on %s as %s\n' "$RUNNER_NAME" "$(hostname)" "$(whoami)"
+          printf 'Runner %s (%s %s)\n' "$RUNNER_NAME" "$RUNNER_OS" "$RUNNER_ARCH"
       - name: Build and verify the static site
         run: |
           npm ci
@@ -37,3 +38,11 @@ jobs:
           path: dist/
           if-no-files-found: error
           retention-days: 7
+      - name: Publish static files
+        run: |
+          site_directory=/srv/react-runner-smoke/www
+          cp -R dist/assets/. "$site_directory/assets/"
+          pending_page="$(mktemp "$site_directory/.index.XXXXXX")"
+          trap 'rm -f "$pending_page"' EXIT
+          install -m 0644 dist/index.html "$pending_page"
+          mv -fT "$pending_page" "$site_directory/index.html"
